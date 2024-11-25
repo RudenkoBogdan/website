@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bogdan Alenovich Rudenko</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body {
+                height: 100%;
+                width: 100%;
+                overflow-x: hidden; /* Убирает горизонтальную прокрутку */
+                font-family: 'Arial', sans-serif;
+                background-image: url('/app/static/images/background.jpg'); /* Путь к фоновому изображению */
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                color: #ecf0f1; /* Светлый текст */
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 900px;
+                width: 100%;
+                margin: auto;
+                background: rgba(30, 39, 46, 0.9); /* Темный фон с прозрачностью */
+                padding: 30px;
+                border-radius: 15px; /* Скругленные углы */
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Тень для глубины */
+                animation: fadeIn 1.5s ease-in-out; /* Анимация появления */
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                color: #00a8ff; /* Голубой акцент */
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #4cd137; /* Зеленый акцент */
+                margin-top: 30px;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #576574; /* Линия серого цвета */
+                padding-bottom: 5px;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            ul li {
+                background: #3d3d3d; /* Темный фон элемента */
+                margin: 10px 0;
+                padding: 15px;
+                border-left: 6px solid #00a8ff; /* Голубая линия */
+                font-size: 1rem;
+                border-radius: 5px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            ul li:hover {
+                transform: translateX(5px); /* Лёгкий сдвиг при наведении */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            ul li:nth-child(even) {
+                border-left: 6px solid #4cd137; /* Зеленый акцент */
+            }
+
+            ul li:nth-child(odd) {
+                margin-left: 15px; /* Смещение для нечетных элементов */
+            }
+
+            .contact-info {
+                margin-top: 30px;
+            }
+
+            .contact-info a {
+                color: #00a8ff; /* Голубой цвет ссылок */
+                text-decoration: none;
+                font-weight: bold;
+                transition: color 0.3s ease;
+            }
+
+            .contact-info a:hover {
+                color: #4cd137; /* Зеленый цвет при наведении */
+                text-decoration: underline;
+            }
+
+            hr {
+                border: none;
+                height: 2px;
+                background: #00a8ff; /* Голубая линия */
+                margin: 20px 0;
+            }
+
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin: 10px 0;
+            }
+
+            .contact-info p {
+                margin: 5px 0;
+                font-size: 1.1rem;
+            }
+
+            .contact-info a {
+                display: block;
+                margin: 5px 0;
+                font-size: 1.1rem;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{ data.name }}</h1>
+            <p><strong>{{ data.profession }}</strong></p>
+            <hr>
+            <p><strong>Bio: </strong>{{ data.bio }}</p>
+            
+            <h2>Skills:</h2>
+            <ul>
+                {% for skill in data.skills %}
+                    {% if loop.index is odd %}
+                    <li><strong>{{ skill }}</strong></li>
+                    {% else %}
+                    <li>{{ skill }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>        
+
+            <h2>Contact Information:</h2>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:{{ data.contact.email }}">{{ data.contact.email }}</a></p>
+                <p>Phone: {{ data.contact.phone }}</p>
+                <a href="{{ data.contact.github }}" target="_blank">GitHub</a>
+                <a href="{{ data.contact.kaggle }}" target="_blank">Kaggle</a>
+                <a href="{{ data.contact.linkedin }}" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </body>
+</html>
